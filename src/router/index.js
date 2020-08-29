@@ -4,25 +4,31 @@ import {Splash} from '../pages';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Login from '../pages/Login-screen';
 import Dashboard from '../pages/Dashboard-screen';
+import Process from '../pages/Process-screen';
+import Schedule from '../pages/Schedule-screen';
+import Account from '../pages/Account-screen';
+import BottomNavigator from '../components/molecules/BottomNavigator';
 // import {BottomNavigator} from '../components';
 const hide = {headerShown: false};
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
-// const mainApp = () => {
-//   return (
-//     <Tab.Navigator tabBar={props => <BottomNavigator {...props} />}>
-//       <Tab.Screen name="Doctor" component={Doctor} />
-//       <Tab.Screen name="Messages" component={Messages} />
-//       <Tab.Screen name="Hospitals" component={Hospitals} />
-//     </Tab.Navigator>
-//   );
-// };
+//
+const mainApp = () => {
+  return (
+    <Tab.Navigator tabBar={(props) => <BottomNavigator {...props} />}>
+      <Tab.Screen name="Dashboard" component={Dashboard} />
+      <Tab.Screen name="Process" component={Process} />
+      <Tab.Screen name="Schedule" component={Schedule} />
+      <Tab.Screen name="Account" component={Account} />
+    </Tab.Navigator>
+  );
+};
 const Router = () => {
   return (
     <Stack.Navigator initialRouteName="Splash">
       <Stack.Screen name="Splash" component={Splash} options={hide} />
       <Stack.Screen name="Login" component={Login} options={hide} />
-      <Stack.Screen name="Dashboard" component={Dashboard} options={hide} />
+      <Stack.Screen name="mainApp" component={mainApp} options={hide} />
     </Stack.Navigator>
   );
 };

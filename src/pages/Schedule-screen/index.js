@@ -1,14 +1,14 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
-const Process = () => {
+const Schedule = () => {
   return (
     <View>
-      <Text>Process screen</Text>
+      <Text>Schedule screen</Text>
     </View>
   );
 };
 
-export default Process;
+export default Schedule;
 
 const styles = StyleSheet.create({});

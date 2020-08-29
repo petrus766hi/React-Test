@@ -1,3 +1,5 @@
 import Button from './Button';
+import TabItem from './TabItem';
+import Gap from './Gap';
 
-export {Button};
+export {Button, TabItem, Gap};

@@ -3,7 +3,7 @@ import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 
 const Button = ({click}) => {
   return (
-    <TouchableOpacity onPress={click}>
+    <TouchableOpacity style={styles.container} onPress={click}>
       <Text>klik disini</Text>
     </TouchableOpacity>
   );
@@ -11,4 +11,8 @@ const Button = ({click}) => {
 
 export default Button;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'green',
+  },
+});
