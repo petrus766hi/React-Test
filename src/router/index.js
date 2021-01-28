@@ -7,6 +7,7 @@ import Dashboard from '../pages/Dashboard-screen';
 import Process from '../pages/Process-screen';
 import Schedule from '../pages/Schedule-screen';
 import Account from '../pages/Account-screen';
+import List from '../pages/List-screen';
 import BottomNavigator from '../components/molecules/BottomNavigator';
 // import {BottomNavigator} from '../components';
 const hide = {headerShown: false};
@@ -29,6 +30,7 @@ const Router = () => {
       <Stack.Screen name="Splash" component={Splash} options={hide} />
       <Stack.Screen name="Login" component={Login} options={hide} />
       <Stack.Screen name="mainApp" component={mainApp} options={hide} />
+      <Stack.Screen name="List" component={List} options={hide} />
     </Stack.Navigator>
   );
 };

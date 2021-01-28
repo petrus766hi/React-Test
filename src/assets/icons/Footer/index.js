@@ -6,6 +6,10 @@ import CalendarActive from './calendar-active.png';
 import CalendarInactive from './calendar-inactive.png';
 import AccountActive from './user-active.png';
 import AccountInactive from './user-inactive.png';
+import Logo from  './Logo.png';
+import Back from  './back.png';
+import Search from  './search.png';
+import Union from  './Union.png';
 
 export {
   HomeActive,
@@ -16,4 +20,9 @@ export {
   CalendarInactive,
   AccountActive,
   AccountInactive,
+  Logo,
+  Back,
+  Search,
+  Union
+
 };
