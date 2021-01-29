@@ -26,7 +26,7 @@ const Card = ({click, type, typecar, brandcar, pricecar, imagecar}) => {
               <Text style={styles.brandlabel}>{brandcar}</Text>
               <Text style={styles.typelabel}>{typecar}</Text>
               <View style={styles.rangelabelgroup}>
-                <Text style={styles.leftlabel}>Mulai Dari</Text>
+                <Text style={styles.leftlabel}>Asal Dari</Text>
                 <Text style={styles.pricelabel}>{pricecar}</Text>
               </View>
             </View>
@@ -73,7 +73,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 20,
     padding: 10
-
   },
   imgcar: {
     width: width * 0.3,
