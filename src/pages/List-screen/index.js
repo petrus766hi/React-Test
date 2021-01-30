@@ -64,6 +64,7 @@ const List = ({navigation}) => {
            <View style={{marginHorizontal: 10}}>
               <Search text="Cari Jenis Kucing" onChangeText={_.debounce((e)=> getSearch(e),2000)} />
            </View>
+           <ScrollView>
           <FlatList
             numColumns={2}
             data={data}
@@ -71,6 +72,7 @@ const List = ({navigation}) => {
             onEndReachedThreshold={0.1}
             renderItem={(item) =>{
               return(
+
                   <Card
                     type="tipe"
                     pricecar={item.item.origin}
@@ -81,9 +83,11 @@ const List = ({navigation}) => {
                       navigation.navigate('Detail', {name: item.item.name});
                     }}
                   />
+
               )
             }}
           />
+          </ScrollView>
       </View>
     )
 }

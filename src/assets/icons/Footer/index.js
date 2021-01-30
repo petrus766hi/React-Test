@@ -10,6 +10,7 @@ import Logo from  './Logo.png';
 import Back from  './back.png';
 import Search from  './search.png';
 import Union from  './Union.png';
+import Logos from  './pngegg.png';
 
 export {
   HomeActive,
@@ -23,6 +24,7 @@ export {
   Logo,
   Back,
   Search,
-  Union
+  Union,
+  Logos
 
 };
