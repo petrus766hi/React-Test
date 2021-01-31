@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react'
-import { View, Text , Dimensions, StyleSheet, ScrollView, FlatList} from 'react-native'
+import { View, Text , Dimensions, StyleSheet, ScrollView, FlatList,ActivityIndicator} from 'react-native'
 import Axios from 'axios'
 import {Header, Search, Card} from '../../components'
 import * as _ from 'lodash'
@@ -9,16 +9,20 @@ const height = Dimensions.get('window').height;
 const List = ({navigation}) => {
   const [data, setData] = useState([])
   const [page, setPage] = useState(0)
-
+  const [loading, setLoading] = useState(false);
   const getDataAll = async () => {
     try {
+      setLoading(true)
       const response = await Axios.get(`https://api.thecatapi.com/v1/breeds?limit=10&page=${page}`)
       if(response.data){
         setData(response.data)
+        setLoading(false)
       }else{
         setData([])
+        setLoading(false)
       }
     } catch (error) {
+      setLoading(false)
       console.log('err', error)
     }
   }
@@ -58,6 +62,18 @@ const List = ({navigation}) => {
 
   }
 
+  const renderFooter = () => {
+    return (
+      <View style={styles.footer}>
+        {loading ? (
+          <ActivityIndicator
+            color="black"
+            style={{margin: 15}} />
+        ) : null}
+      </View>
+    );
+  };
+
     return (
         <View style={{flex: 1, backgroundColor: '#F4F4F4'}}>
            <Header title="List Kucing" isIcon={true} />
@@ -67,16 +83,17 @@ const List = ({navigation}) => {
           <FlatList
             numColumns={2}
             data={data}
+            ListFooterComponent={renderFooter}
             onEndReached={handleLoadMore}
-            onEndReachedThreshold={1}
+            onEndReachedThreshold={0.02}
             renderItem={(item) =>{
               return(
                   <Card
                     type="tipe"
-                    pricecar={item.item.origin}
-                    brandcar={item.item.id}
-                    typecar={item.item.name}
-                    imagecar={item.item.image ?  item.item.image.url : 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png'}
+                    pricecard={item.item.origin}
+                    brandcard={item.item.id}
+                    typecard={item.item.name}
+                    imagecard={item.item.image ?  item.item.image.url : 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png'}
                     click={() => {
                       navigation.navigate('Detail', {name: item.item.name});
                     }}
@@ -94,5 +111,11 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
+  },
+  footer: {
+    padding: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
   },
 });

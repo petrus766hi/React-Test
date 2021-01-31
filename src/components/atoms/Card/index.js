@@ -13,28 +13,28 @@ import {colors, fonts} from '../../../utils';
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 
-const Card = ({click, type, typecar, brandcar, pricecar, imagecar}) => {
+const Card = ({click, type, typecard, brandcard, pricecard, imagecard}) => {
   const Typecard = () => {
     if (type == 'tipe') {
       return (
-        <ScrollView>
+        <View>
           <TouchableOpacity style={styles.card(type)} onPress={click}>
             <View style={styles.cardcar}>
-              <Image source={{uri: imagecar}} style={styles.imgcar} />
+              <Image source={{uri: imagecard}} style={styles.imgcar} />
             </View>
             <View style={styles.detailcar}>
-              <Text style={styles.brandlabel}>{brandcar}</Text>
-              <Text style={styles.typelabel}>{typecar}</Text>
+              <Text style={styles.brandlabel}>{brandcard}</Text>
+              <Text style={styles.typelabel}>{typecard}</Text>
               <View style={styles.rangelabelgroup}>
                 <Text style={styles.leftlabel}>Asal Dari</Text>
-                <Text style={styles.pricelabel}>{pricecar}</Text>
+                <Text style={styles.pricelabel}>{pricecard}</Text>
               </View>
             </View>
             <View style={styles.buttondetail}>
               <Text style={styles.buttonlabel}>Lihat Detail</Text>
             </View>
           </TouchableOpacity>
-        </ScrollView>
+        </View>
       );
     } else {
       return (

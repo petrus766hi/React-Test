@@ -540,12 +540,13 @@ const styles = StyleSheet.create({
     // height: '5%',
     backgroundColor: 'white',
     elevation: 2,
-    marginBottom: 20,
+    marginBottom: 50,
     marginTop: -height / 20,
     marginHorizontal: 10,
     borderRadius: 8,
     paddingVertical: 10,
     paddingHorizontal: '2%',
+
   },
 
   boxPengajuan: {
