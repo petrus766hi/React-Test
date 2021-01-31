@@ -68,7 +68,7 @@ const List = ({navigation}) => {
             numColumns={2}
             data={data}
             onEndReached={handleLoadMore}
-            onEndReachedThreshold={0.1}
+            onEndReachedThreshold={1}
             renderItem={(item) =>{
               return(
                   <Card

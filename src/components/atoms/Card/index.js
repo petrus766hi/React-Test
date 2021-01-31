@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
   },
   typelabel: {
     fontSize: 18,
-    // fontFamily: fonts.regular,
+    fontFamily: fonts.regular,
     color: colors.primary,
   },
   buttondetail: {
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
   },
   brandlabel: {
       fontSize: 10,
-    //   fontFamily: fonts.bold
+      fontFamily: fonts.bold
     },
   rangelabelgroup: {
     flexDirection: 'row',
@@ -111,16 +111,16 @@ const styles = StyleSheet.create({
   },
   leftlabel: {
       fontSize: 10,
-    //   fontFamily: fonts.light
+      fontFamily: fonts.light
     },
   pricelabel: {
     fontSize: 10,
-    // fontFamily: fonts.bold,
+    fontFamily: fonts.bold,
     color: colors.carrot,
     marginLeft: 5,
   },
   buttonlabel: {
-    // fontFamily: fonts.semibold,
+    fontFamily: fonts.semibold,
     fontSize: 10,
     color: colors.primary,
   },
