@@ -18,7 +18,7 @@ const Card = ({click, type, typecard, brandcard, pricecard, imagecard}) => {
     if (type == 'tipe') {
       return (
         <View>
-          <TouchableOpacity style={styles.card(type)} onPress={click}>
+          <View style={styles.card(type)}>
             <View style={styles.cardcar}>
               <Image source={{uri: imagecard}} style={styles.imgcar} />
             </View>
@@ -26,14 +26,14 @@ const Card = ({click, type, typecard, brandcard, pricecard, imagecard}) => {
               <Text style={styles.brandlabel}>{brandcard}</Text>
               <Text style={styles.typelabel}>{typecard}</Text>
               <View style={styles.rangelabelgroup}>
-                <Text style={styles.leftlabel}>Asal Dari</Text>
+                <Text style={styles.leftlabel}>Price </Text>
                 <Text style={styles.pricelabel}>{pricecard}</Text>
               </View>
             </View>
-            <View style={styles.buttondetail}>
-              <Text style={styles.buttonlabel}>Lihat Detail</Text>
-            </View>
-          </TouchableOpacity>
+            <TouchableOpacity style={styles.buttondetail} onPress={click}>
+              <Text style={styles.buttonlabel}>Tambahkan Ke Keranjang</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       );
     } else {
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     width: width * 0.4,
     marginVertical: height * 0.025,
     marginHorizontal: width * 0.05,
-    height: type == 'tipe' ? height * 0.30 : height * 0.18,
+    height: type == 'tipe' ? height * 0.3 : height * 0.18,
     borderRadius: 10,
     elevation: 5,
     alignItems: type == 'tipe' ? 'flex-start' : 'center',
@@ -72,13 +72,13 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     paddingHorizontal: 20,
-    padding: 10
+    padding: 10,
   },
   imgcar: {
     width: width * 0.3,
     height: height * 0.15,
     resizeMode: 'cover',
-    borderRadius: 75
+    borderRadius: 75,
   },
   detailcar: {
     paddingHorizontal: 5,
@@ -87,7 +87,8 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   typelabel: {
-    fontSize: 18,
+    fontSize: 10,
+    fontWeight: 'bold',
     fontFamily: fonts.regular,
     color: colors.primary,
   },
@@ -96,23 +97,23 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 7,
-    width:width*0.4,
-    borderBottomLeftRadius:10,
-    borderBottomRightRadius:10
+    width: width * 0.4,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
   },
   brandlabel: {
-      fontSize: 10,
-      fontFamily: fonts.bold
-    },
+    fontSize: 10,
+    fontFamily: fonts.bold,
+  },
   rangelabelgroup: {
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: 5,
   },
   leftlabel: {
-      fontSize: 10,
-      fontFamily: fonts.light
-    },
+    fontSize: 10,
+    fontFamily: fonts.light,
+  },
   pricelabel: {
     fontSize: 10,
     fontFamily: fonts.bold,

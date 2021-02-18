@@ -21,9 +21,7 @@ const List = ({navigation}) => {
   const getDataAll = async () => {
     try {
       setLoading(true);
-      const response = await Axios.get(
-        `https://api.thecatapi.com/v1/breeds?limit=10&page=${page}`,
-      );
+      const response = await Axios.get(`https://fakestoreapi.com/products`);
       if (response.data) {
         setData(response.data);
         setLoading(false);
@@ -39,20 +37,24 @@ const List = ({navigation}) => {
 
   const getSearch = async (search) => {
     if (search != '') {
-      await Axios.get(`https://api.thecatapi.com/v1/breeds?limit=67`)
+      await Axios.get(`https://fakestoreapi.com/products`)
         .then((res) => {
           const dataFilter = res.data.filter((e) => {
-            return e.name === search;
+            console.log('xxx', e.title.toLowerCase().includes(search));
+            return e.title.toLowerCase().includes(search);
           });
-          if (dataFilter) {
-            setData(dataFilter);
-          } else {
-            setData([]);
-          }
+
+          // if (dataFilter) {
+          //   setData(dataFilter);
+          // } else {
+          //   setData([]);
+          // }
         })
         .catch((error) => {
           console.log('err', error);
         });
+    } else {
+      getDataAll();
     }
   };
 
@@ -85,7 +87,7 @@ const List = ({navigation}) => {
       <Header title="List Kucing" isIcon={true} />
       <View style={{marginHorizontal: 10}}>
         <Search
-          text="Cari Jenis Kucing"
+          text="Cari Produk"
           onChangeText={_.debounce((e) => getSearch(e), 2000)}
         />
       </View>
@@ -99,14 +101,10 @@ const List = ({navigation}) => {
           return (
             <Card
               type="tipe"
-              pricecard={item.item.origin}
-              brandcard={item.item.id}
-              typecard={item.item.name}
-              imagecard={
-                item.item.image
-                  ? item.item.image.url
-                  : 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png'
-              }
+              pricecard={item.item.price}
+              brandcard={item.item.category}
+              typecard={item.item.title}
+              imagecard={item.item.image}
               click={() => {
                 navigation.navigate('Detail', {name: item.item.name});
               }}
