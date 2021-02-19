@@ -8,6 +8,8 @@ target 'equityfinance' do
 
   use_react_native!(:path => config["reactNativePath"])
 
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   target 'equityfinanceTests' do
     inherit! :complete
     # Pods for testing

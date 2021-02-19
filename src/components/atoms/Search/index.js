@@ -12,10 +12,31 @@ import {search, Union} from '../../../assets';
 
 const height = Dimensions.get('screen').height;
 
-const Search = ({text, onChangeText, click}) => {
+const Search = ({text, onChangeText, click, navigation}) => {
   return (
     <View style={{marginVertical: '1%'}}>
-      <Text style={styles.text}>{text}</Text>
+      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+        <Text style={styles.text}>{text}</Text>
+        <View></View>
+        <TouchableOpacity
+          style={{
+            backgroundColor: 'red',
+            width: 80,
+            padding: 5,
+            borderRadius: 15,
+            top: -(height * 0.05),
+          }}
+          onPress={() => navigation.navigate('Cart')}>
+          <Text
+            style={{
+              color: 'white',
+              textAlign: 'center',
+            }}>
+            Cart
+          </Text>
+        </TouchableOpacity>
+      </View>
+
       <View style={styles.boxSearch}>
         <Image source={search} style={styles.imgSearch} />
         <TextInput style={{flex: 1}} onChangeText={(e) => onChangeText(e)} />
@@ -50,7 +71,7 @@ const styles = StyleSheet.create({
     height: 45,
     backgroundColor: 'white',
     elevation: 5,
-    marginTop: -(height * 0.02),
+    marginTop: -(height * 0.04),
     flexDirection: 'row',
     borderRadius: 10,
     paddingHorizontal: '5%',

@@ -9,6 +9,7 @@ import Schedule from '../pages/Schedule-screen';
 import Account from '../pages/Account-screen';
 import List from '../pages/List-screen';
 import Detail from '../pages/Detail-screen';
+import Cart from '../pages/Cart-screen';
 import BottomNavigator from '../components/molecules/BottomNavigator';
 // import {BottomNavigator} from '../components';
 const hide = {headerShown: false};
@@ -33,6 +34,7 @@ const Router = () => {
       <Stack.Screen name="mainApp" component={mainApp} options={hide} />
       <Stack.Screen name="List" component={List} options={hide} />
       <Stack.Screen name="Detail" component={Detail} options={hide} />
+      <Stack.Screen name="Cart" component={Cart} options={hide} />
     </Stack.Navigator>
   );
 };

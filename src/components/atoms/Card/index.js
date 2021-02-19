@@ -17,7 +17,7 @@ const Card = ({click, type, typecard, brandcard, pricecard, imagecard}) => {
   const Typecard = () => {
     if (type == 'tipe') {
       return (
-        <View>
+        <ScrollView>
           <View style={styles.card(type)}>
             <View style={styles.cardcar}>
               <Image source={{uri: imagecard}} style={styles.imgcar} />
@@ -34,7 +34,7 @@ const Card = ({click, type, typecard, brandcard, pricecard, imagecard}) => {
               <Text style={styles.buttonlabel}>Tambahkan Ke Keranjang</Text>
             </TouchableOpacity>
           </View>
-        </View>
+        </ScrollView>
       );
     } else {
       return (
