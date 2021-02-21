@@ -13,12 +13,20 @@ import {colors, fonts} from '../../../utils';
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 
-const Card = ({click, type, typecard, brandcard, pricecard, imagecard}) => {
+const Card = ({
+  click,
+  type,
+  typecard,
+  brandcard,
+  pricecard,
+  imagecard,
+  kuy,
+}) => {
   const Typecard = () => {
     if (type == 'tipe') {
       return (
         <ScrollView>
-          <View style={styles.card(type)}>
+          <View style={styles.card(type)} key={kuy}>
             <View style={styles.cardcar}>
               <Image source={{uri: imagecard}} style={styles.imgcar} />
             </View>
@@ -27,7 +35,7 @@ const Card = ({click, type, typecard, brandcard, pricecard, imagecard}) => {
               <Text style={styles.typelabel}>{typecard}</Text>
               <View style={styles.rangelabelgroup}>
                 <Text style={styles.leftlabel}>Price </Text>
-                <Text style={styles.pricelabel}>{pricecard}</Text>
+                <Text style={styles.pricelabel}> $ {pricecard}</Text>
               </View>
             </View>
             <TouchableOpacity style={styles.buttondetail} onPress={click}>

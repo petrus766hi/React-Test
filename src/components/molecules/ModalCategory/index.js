@@ -13,7 +13,7 @@ import {Close} from '../../../assets/icons';
 const height = Dimensions.get('screen').height;
 const width = Dimensions.get('screen').width;
 
-const ModalFilter = ({visible, close, setFilter}) => {
+const ModalCategory = ({visible, close, setCategory}) => {
   const [select, setSelected] = useState(1);
 
   return (
@@ -39,21 +39,54 @@ const ModalFilter = ({visible, close, setFilter}) => {
           <TouchableOpacity
             style={select == 0 ? styles.item2 : styles.item}
             onPress={() => {
-              setFilter('asc');
+              setCategory('all');
               setSelected(0);
               close();
             }}>
-            <Text style={select == 0 ? styles.text2 : styles.text}>Lowest</Text>
+            <Text style={select == 0 ? styles.text2 : styles.text}>All</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={select == 1 ? styles.item2 : styles.item}
             onPress={() => {
-              setFilter('desc');
+              setCategory('electronics');
               setSelected(1);
               close();
             }}>
             <Text style={select == 1 ? styles.text2 : styles.text}>
-              Highest
+              Electronics
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={select == 2 ? styles.item2 : styles.item}
+            onPress={() => {
+              setCategory('jewelery');
+              setSelected(2);
+              close();
+            }}>
+            <Text style={select == 2 ? styles.text2 : styles.text}>
+              Jewelery
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={select == 3 ? styles.item2 : styles.item}
+            onPress={() => {
+              setCategory('men clothing');
+              setSelected(3);
+              close();
+            }}>
+            <Text style={select == 3 ? styles.text2 : styles.text}>
+              Men clothing
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={select == 4 ? styles.item2 : styles.item}
+            onPress={() => {
+              setCategory('women clothing');
+              setSelected(4);
+              close();
+            }}>
+            <Text style={select == 4 ? styles.text2 : styles.text}>
+              Women clothing
             </Text>
           </TouchableOpacity>
         </View>
@@ -84,4 +117,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ModalFilter;
+export default ModalCategory;

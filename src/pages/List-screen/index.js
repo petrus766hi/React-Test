@@ -14,52 +14,88 @@ import Fuse from 'fuse.js';
 import {connect} from 'react-redux';
 import * as actions from '../../redux/action/cartActions';
 import ModalFilter from '../../components/molecules/ModalFilter';
+import ModalCategory from '../../components/molecules/ModalCategory';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 
-const List = ({navigation, addItem}) => {
+const List = ({navigation, addItem, cartItems, route}) => {
   const [data, setData] = useState([]);
-  const [page, setPage] = useState(0);
-  const [loading, setLoading] = useState(false);
   const [filter, setFilter] = useState('Sort');
+  const [category, setCategory] = useState('All');
   const [modalFilter, setModalFilter] = useState(false);
+  const [modalCategory, setModalCategory] = useState(false);
+  const [cartsLength, setCartsLength] = useState(0);
 
-  const getDataAll = async () => {
-    try {
-      const response = await Axios.get(`https://fakestoreapi.com/products`);
-      if (response.data) {
-        setData(response.data);
+  const getDataAll = () => {
+    const datas = route.params.data;
+    setData(datas);
+  };
+  const getSearch = async (search) => {
+    if (search != '') {
+      const fuse = new Fuse(data, {
+        keys: ['title'],
+      });
+      const result = fuse.search(search);
+      const dataFilter = result.map((items) => {
+        return items.item;
+      });
+      if (dataFilter) {
+        setData(dataFilter);
       } else {
         setData([]);
       }
-    } catch (error) {
-      console.log('err', error);
+    } else {
+      getDataAll();
     }
   };
 
-  const getSearch = async (search) => {
-    if (search != '') {
-      await Axios.get(`https://fakestoreapi.com/products`)
-        .then((res) => {
-          const fuse = new Fuse(res.data, {
-            keys: ['title'],
-          });
-          const result = fuse.search(search);
-          const dataFilter = result.map((items) => {
-            return items.item;
-          });
-          if (dataFilter) {
-            setData(dataFilter);
-          } else {
-            setData([]);
-          }
-        })
-        .catch((error) => {
-          console.log('err', error);
-        });
-    } else {
-      getDataAll();
+  const ModalCategoryClick = () => {
+    setModalVisible(false);
+    categoryProduct();
+  };
+  const textCategory = (category) => {
+    console.log('xxx', category);
+    if (category == 'all') {
+      setCategory('All');
+    } else if (category == 'electronics') {
+      setCategory('Electronics');
+    } else if (category == 'jewelery') {
+      setCategory('Jewelery');
+    } else if (category == 'men clothing') {
+      setCategory('Men');
+    } else if (category == 'women clothing') {
+      setCategory('Women');
+    }
+  };
+
+  const categoryProduct = async (product) => {
+    console.log('xxx', product);
+    textCategory(product);
+    const response = route.params.data;
+    if (product === 'All') {
+      setData(response);
+    } else if (product === 'electronics') {
+      const data = response.filter((e) => {
+        return e.category === product;
+      });
+      console.log(data);
+      setData(data);
+    } else if (product === 'jewelery') {
+      const data = response.filter((e) => {
+        return e.category === product;
+      });
+      setData(data);
+    } else if (product === 'men clothing') {
+      const data = response.filter((e) => {
+        return e.category === product;
+      });
+      setData(data);
+    } else if (product === 'women clothing') {
+      const data = response.filter((e) => {
+        return e.category === product;
+      });
+      setData(data);
     }
   };
 
@@ -70,17 +106,16 @@ const List = ({navigation, addItem}) => {
       setFilter('Highest');
     }
   };
-
-  const sortPrice = async (price) => {
+  const sortPrice = async (price, datas) => {
     textFilter(price);
-    const response = await Axios.get(`https://fakestoreapi.com/products`);
+    const response = route.params.data;
     if (price === 'desc') {
-      const data = response.data.sort((a, b) => {
+      const data = response.sort((a, b) => {
         return a.price - b.price;
       });
       setData(data);
-    } else {
-      const data = response.data.sort((a, b) => {
+    } else if (price === 'asc') {
+      const data = response.sort((a, b) => {
         return b.price - a.price;
       });
       setData(data);
@@ -95,6 +130,10 @@ const List = ({navigation, addItem}) => {
     getDataAll();
   }, []);
 
+  useEffect(() => {
+    setCartsLength(cartItems.length);
+  });
+
   return (
     <>
       <View style={{flex: 1, backgroundColor: '#F4F4F4'}}>
@@ -103,31 +142,36 @@ const List = ({navigation, addItem}) => {
           <Search
             text="Cari Produk"
             onChangeText={_.debounce((e) => getSearch(e), 2000)}
-            // click={() => navigation.navigate('Cart')}
             navigation={navigation}
+            cartlength={cartsLength}
           />
-          <TouchableOpacity
-            style={{
-              backgroundColor: '#356AA0',
-              width: 80,
-              marginVertical: 10,
-              padding: 5,
-              borderRadius: 15,
-            }}
-            onPress={() => setModalFilter(true)}>
-            <Text style={{color: 'white', textAlign: 'center'}}>{filter}</Text>
-          </TouchableOpacity>
+          <View style={styles.badgecontainer}>
+            <TouchableOpacity
+              style={styles.badgeFilter}
+              onPress={() => setModalCategory(true)}>
+              <Text style={{color: 'white', textAlign: 'center'}}>
+                {category}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.badgeFilter}
+              onPress={() => setModalFilter(true)}>
+              <Text style={{color: 'white', textAlign: 'center'}}>
+                {filter}
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
         <ScrollView>
           <View style={styles.wrappercard}>
-            {data.map((e) => {
+            {data.map((e, index) => {
               return (
                 <Card
-                  // key={e.id}
+                  kuy={index}
                   type="tipe"
                   pricecard={e.price}
                   brandcard={e.category}
-                  typecard={e.title}
+                  typecard={e.title.slice(0, 15)}
                   imagecard={e.image}
                   click={() => {
                     addItem(e);
@@ -144,8 +188,21 @@ const List = ({navigation, addItem}) => {
         close={() => setModalFilter(false)}
         setFilter={(e) => sortPrice(e)}
       />
+      <ModalCategory
+        visible={modalCategory}
+        click={() => ModalCategoryClick()}
+        close={() => setModalCategory(false)}
+        setCategory={(e) => categoryProduct(e)}
+      />
     </>
   );
+};
+
+const mapStateToProps = (state) => {
+  const {cartItems} = state;
+  return {
+    cartItems: cartItems,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -156,11 +213,23 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(List);
+export default connect(mapStateToProps, mapDispatchToProps)(List);
+
 const styles = StyleSheet.create({
   wrappercard: {
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
+  },
+  badgeFilter: {
+    backgroundColor: '#356AA0',
+    width: 90,
+    marginVertical: 10,
+    padding: 5,
+    borderRadius: 15,
+  },
+  badgecontainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
   },
 });
