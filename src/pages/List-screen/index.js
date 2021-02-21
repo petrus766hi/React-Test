@@ -55,7 +55,6 @@ const List = ({navigation, addItem, cartItems, route}) => {
     categoryProduct();
   };
   const textCategory = (category) => {
-    console.log('xxx', category);
     if (category == 'all') {
       setCategory('All');
     } else if (category == 'electronics') {
@@ -70,16 +69,14 @@ const List = ({navigation, addItem, cartItems, route}) => {
   };
 
   const categoryProduct = async (product) => {
-    console.log('xxx', product);
     textCategory(product);
     const response = route.params.data;
-    if (product === 'All') {
+    if (product === 'all') {
       setData(response);
     } else if (product === 'electronics') {
       const data = response.filter((e) => {
         return e.category === product;
       });
-      console.log(data);
       setData(data);
     } else if (product === 'jewelery') {
       const data = response.filter((e) => {
@@ -100,21 +97,22 @@ const List = ({navigation, addItem, cartItems, route}) => {
   };
 
   const textFilter = (filter) => {
-    if (filter == 'desc') {
+    if (filter == 'asc') {
       setFilter('Lowest');
-    } else if (filter == 'asc') {
+    } else if (filter == 'desc') {
       setFilter('Highest');
     }
   };
-  const sortPrice = async (price, datas) => {
+
+  const sortPrice = async (price) => {
     textFilter(price);
-    const response = route.params.data;
-    if (price === 'desc') {
+    const response = data;
+    if (price === 'asc') {
       const data = response.sort((a, b) => {
         return a.price - b.price;
       });
       setData(data);
-    } else if (price === 'asc') {
+    } else if (price === 'desc') {
       const data = response.sort((a, b) => {
         return b.price - a.price;
       });
